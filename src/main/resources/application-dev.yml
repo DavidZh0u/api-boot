@@ -1,0 +1,25 @@
+# swagger相关配置
+swagger:
+  version: v0.1.0
+  title: ApiBoot
+  description: ApiBoot是一款SpringBoot编写的Api基础框架
+  # 配置swagger扫描控制器的root package
+  base-package: com.github.hengboy.api.boot
+  # true：启用，false：不启用
+  enabled: true
+  contact:
+    name: 恒宇少年 - 于起宇
+    email: jnyuqy@gmail.com
+    url: http://blog.yuqiyu.com
+  # oauth2 header name
+  authorization:
+    key-name: Authorization
+spring:
+  # 数据源配置
+  datasource:
+    druid:
+      # com.mysql.cj.jdbc.Driver驱动类在使用时，url需要携带serverTimezone，设置时区
+      url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver

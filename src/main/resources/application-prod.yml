@@ -1,0 +1,9 @@
+spring:
+  # 数据源配置
+  datasource:
+    druid:
+      # com.mysql.cj.jdbc.Driver驱动类在使用时，url需要携带serverTimezone，设置时区
+      url: jdbc:mysql://xx.xxx.xxx.xxx:3306/dbName?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      username: xxx
+      password: xxxx
+      driver-class-name: com.mysql.cj.jdbc.Driver
