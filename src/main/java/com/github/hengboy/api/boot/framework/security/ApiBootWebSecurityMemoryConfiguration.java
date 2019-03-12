@@ -30,13 +30,13 @@ import static com.github.hengboy.api.boot.framework.security.properties.ApiBootS
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = SecurityAway.MEMORY)
-@Import(ApiSecurityAutoConfiguration.class)
-public class ApiSecurityMemoryAutoConfiguration {
+@ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = SecurityAway.MEMORY, matchIfMissing = true)
+@Import(ApiBootWebSecurityConfiguration.class)
+public class ApiBootWebSecurityMemoryConfiguration {
     /**
      * logger instance
      */
-    static Logger logger = LoggerFactory.getLogger(ApiSecurityMemoryAutoConfiguration.class);
+    static Logger logger = LoggerFactory.getLogger(ApiBootWebSecurityMemoryConfiguration.class);
 
     /**
      * 密码加密方式

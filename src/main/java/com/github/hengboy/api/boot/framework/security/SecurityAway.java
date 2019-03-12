@@ -15,9 +15,9 @@ public interface SecurityAway {
     /**
      * 内存方式
      */
-    String MEMORY = "MEMORY";
+    String MEMORY = "memory";
     /**
      * 数据库方式
      */
-    String JDBC = "JDBC";
+    String JDBC = "jdbc";
 }

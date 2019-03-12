@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class ApiSecurityAutoConfiguration extends WebSecurityConfigurerAdapter {
+public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     /**
      * 密码加密方式
      * 自定义加密方式

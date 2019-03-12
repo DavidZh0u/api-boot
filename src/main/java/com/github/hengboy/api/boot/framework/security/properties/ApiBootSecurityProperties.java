@@ -33,8 +33,8 @@ public class ApiBootSecurityProperties {
      */
     private String authPrefix = "/api/**";
     /**
-     * 安全认证方式
-     * 默认采用内存方式验证
+     * 认证用户存储方式
+     * @see com.github.hengboy.api.boot.framework.security.SecurityAway
      */
     private String away;
     /**

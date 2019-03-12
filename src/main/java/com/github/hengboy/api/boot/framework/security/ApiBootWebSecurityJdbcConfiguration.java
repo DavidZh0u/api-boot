@@ -27,12 +27,12 @@ import static com.github.hengboy.api.boot.framework.security.properties.ApiBootS
  */
 @Configuration
 @ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = SecurityAway.JDBC)
-@Import(ApiSecurityAutoConfiguration.class)
-public class ApiSecurityJdbcAutoConfiguration {
+@Import(ApiBootWebSecurityConfiguration.class)
+public class ApiBootWebSecurityJdbcConfiguration {
     /**
      * logger instance
      */
-    static Logger logger = LoggerFactory.getLogger(ApiSecurityJdbcAutoConfiguration.class);
+    static Logger logger = LoggerFactory.getLogger(ApiBootWebSecurityJdbcConfiguration.class);
     /**
      * 密码加密方式
      */
