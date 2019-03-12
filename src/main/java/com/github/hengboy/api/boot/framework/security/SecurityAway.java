@@ -11,13 +11,13 @@ package com.github.hengboy.api.boot.framework.security;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public enum SecurityAway {
+public interface SecurityAway {
     /**
      * 内存方式
      */
-    MEMORY,
+    String MEMORY = "MEMORY";
     /**
      * 数据库方式
      */
-    JDBC
+    String JDBC = "JDBC";
 }

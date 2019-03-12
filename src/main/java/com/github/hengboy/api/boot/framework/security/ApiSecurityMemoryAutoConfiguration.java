@@ -16,6 +16,8 @@ import org.springframework.util.ObjectUtils;
 import javax.annotation.PostConstruct;
 import java.util.List;
 
+import static com.github.hengboy.api.boot.framework.security.properties.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
+
 /**
  * 内存方式WebSecurity相关配置
  *
@@ -28,7 +30,7 @@ import java.util.List;
  * GitHub：https://github.com/hengboy
  */
 @Configuration
-@ConditionalOnProperty(prefix = "api.boot.security", name = "away", havingValue = "MEMORY")
+@ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "away", havingValue = SecurityAway.MEMORY)
 @Import(ApiSecurityAutoConfiguration.class)
 public class ApiSecurityMemoryAutoConfiguration {
     /**

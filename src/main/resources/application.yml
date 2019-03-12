@@ -7,6 +7,7 @@ spring:
     active: dev
 
 # ApiBoot相关配置信息
+# 开源码云地址：https://gitee.com/hengboy/api-boot
 api:
   boot:
     security:
@@ -29,3 +30,10 @@ api:
       # 用户token的作用域
       scopes:
         - api
+
+# Mybatis Enhance 相关配置
+# 开源码云地址：https://gitee.com/hengboy/mybatis-enhance
+hengboy:
+  enhance:
+    # 配置mybatis-enhance扫描自定义xml的位置
+    mapper-locations: classpath:/mappers/*.xml
