@@ -5,3 +5,27 @@ spring:
   # 激活dev profile
   profiles:
     active: dev
+
+# ApiBoot相关配置信息
+api:
+  boot:
+    security:
+      # 配置内存方式配置存储用户信息
+      away: MEMORY
+      # 配置内存方式用户列表
+      users:
+        -
+          username: yuqiyu
+          password: 123456
+    # 配置Oauth2相关信息
+    oauth:
+      # Client Id
+      clientId: ApiBoot
+      # Client Secret
+      clientSecret: ApiBootSecret
+      # 用户获取token的授权方式
+      grantTypes:
+        - password
+      # 用户token的作用域
+      scopes:
+        - api
