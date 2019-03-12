@@ -96,6 +96,82 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--Code-Builder代码生成器-->
+            <plugin>
+                <groupId>com.gitee.hengboy</groupId>
+                <artifactId>code-builder-maven-plugin</artifactId>
+                <version>1.0.5.RELEASE</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generator</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <!--数据库驱动依赖-->
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.46</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <!--true：执行生成，false：不执行-->
+                    <execute>false</execute>
+
+                    <dbName>test</dbName>
+                    <dbUrl>jdbc:mysql://localhost:3306</dbUrl>
+                    <dbUserName>root</dbUserName>
+                    <dbPassword>123456</dbPassword>
+                    <ignoreClassPrefix>ApiBoot</ignoreClassPrefix>
+                    <!--指定表生成-->
+                    <!--<tables>
+                        <table></table>
+                    </tables>-->
+                    <!--根据表达式生成-->
+                    <generatorByPattern>api_boot%</generatorByPattern>
+                    <!--将类自动生成到src目录下-->
+                    <targetDir>src.main.java</targetDir>
+                    <builder>
+                        <packagePrefix>com.github.hengboy.api.boot.logic.common</packagePrefix>
+                        <!--模板列表-->
+                        <templates>
+                            <!--Entity模板-->
+                            <template>
+                                <name>entity.ftl</name>
+                                <packageName>entity</packageName>
+                                <fileSuffix>Entity</fileSuffix>
+                            </template>
+                            <!--DSL Entity模板-->
+                            <template>
+                                <name>dsl.ftl</name>
+                                <packageName>dsl</packageName>
+                                <fileSuffix>Entity</fileSuffix>
+                                <filePrefix>D</filePrefix>
+                            </template>
+                            <!--Service模板-->
+                            <template>
+                                <name>service.ftl</name>
+                                <packageName>service</packageName>
+                                <fileSuffix>Service</fileSuffix>
+                            </template>
+                            <!--Mapper模板-->
+                            <template>
+                                <name>mapper.ftl</name>
+                                <packageName>mapper</packageName>
+                                <fileSuffix>Mapper</fileSuffix>
+                            </template>
+                            <!--Controller模板-->
+                            <template>
+                                <name>controller.ftl</name>
+                                <packageName>controller</packageName>
+                                <fileSuffix>Controller</fileSuffix>
+                            </template>
+                        </templates>
+                    </builder>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
