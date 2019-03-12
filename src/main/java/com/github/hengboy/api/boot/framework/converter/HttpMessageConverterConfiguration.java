@@ -17,8 +17,15 @@
 package com.github.hengboy.api.boot.framework.converter;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson.serializer.ValueFilter;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import com.github.hengboy.api.boot.framework.tools.ClassTools;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -27,10 +34,16 @@ import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.util.ObjectUtils;
+
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 配置fastjson作为数据返回转换
- *
+ * <p>
  * 如果没有配置spring.http.converters.preferred-json-mapper参数则使用该配置进行转换数据返回
  *
  * @author：恒宇少年 - 于起宇
@@ -51,6 +64,17 @@ import org.springframework.context.annotation.Configuration;
         matchIfMissing = true
 )
 public class HttpMessageConverterConfiguration {
+    /**
+     * logger instance
+     */
+    static Logger logger = LoggerFactory.getLogger(HttpMessageConverterConfiguration.class);
+
+    /**
+     * 注入bean工厂
+     */
+    @Autowired
+    private BeanFactory beanFactory;
+
     @Bean
     @ConditionalOnMissingBean
     HttpMessageConverters fastJsonHttpMessageConverters() {
@@ -63,11 +87,32 @@ public class HttpMessageConverterConfiguration {
                 SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.WriteNullStringAsEmpty,
                 SerializerFeature.WriteNullNumberAsZero,
-                //设置默认时间格式化格式，默认格式：yyyy-MM-dd HH:mm:ss
                 SerializerFeature.WriteDateUseDateFormat,
                 SerializerFeature.WriteNullBooleanAsFalse
         );
+        // 设置自定义的valueFilter
+        fastJsonConfig.setSerializeFilters(getDefineFilters());
         fastConverter.setFastJsonConfig(fastJsonConfig);
         return new HttpMessageConverters(fastConverter);
+    }
+
+    /**
+     * 获取项目中定义的ValueFilter实现类列表
+     * 通过BeanFactory读取本项目的Base Package List
+     *
+     * @return ValueFilter数组
+     */
+    ValueFilter[] getDefineFilters() {
+        Set<ValueFilter> valueFilters = new HashSet<>();
+        // 获取项目的package列表
+        List<String> packages = AutoConfigurationPackages.get(beanFactory);
+        if (ObjectUtils.isEmpty(packages)) {
+            return valueFilters.toArray(new ValueFilter[]{});
+        }
+        // 读取所有package下的ValueFilter实现类
+        packages.stream().forEach(pack -> valueFilters.addAll((Collection<? extends ValueFilter>) ClassTools.getSubClassList(pack, ValueFilter.class)));
+        ValueFilter[] filterArray = valueFilters.toArray(new ValueFilter[]{});
+        logger.info("Loaded ValueFilter : {}", filterArray.toString());
+        return filterArray;
     }
 }
