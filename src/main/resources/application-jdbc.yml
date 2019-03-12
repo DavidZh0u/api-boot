@@ -1,0 +1,14 @@
+# ApiBoot相关配置信息
+# 开源码云地址：https://gitee.com/hengboy/api-boot
+api:
+  boot:
+    security:
+      # 配置jdbc方式配置存储用户信息
+      away: jdbc
+    # 配置Oauth2相关信息
+    oauth:
+      away: jdbc
+      jwt:
+        # 开启jwt，默认不开启
+        enable: true
+        sign-key: 恒宇少年 - ApiBoot

@@ -4,37 +4,7 @@ spring:
     name: api-boot
   # 激活dev profile
   profiles:
-    active: dev
-
-# ApiBoot相关配置信息
-# 开源码云地址：https://gitee.com/hengboy/api-boot
-api:
-  boot:
-    security:
-      # 配置内存方式配置存储用户信息
-      away: memory
-      # 配置内存方式用户列表
-      users:
-        -
-          username: yuqiyu
-          password: 123456
-    # 配置Oauth2相关信息
-    oauth:
-      away: jdbc
-      jwt:
-        enable: true
-        sign-key: 恒宇少年 - ApiBoot
-      # Client Id
-      #clientId: ApiBoot
-      # Client Secret
-      #clientSecret: ApiBootSecret
-      # 用户获取token的授权方式
-      #grantTypes:
-      #  - password
-      # 用户token的作用域
-      #scopes:
-      #  - api
-
+    active: dev,memory
 # Mybatis Enhance 相关配置
 # 开源码云地址：https://gitee.com/hengboy/mybatis-enhance
 hengboy:
