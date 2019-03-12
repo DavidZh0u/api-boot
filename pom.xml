@@ -21,61 +21,66 @@
         <swagger.starter.version>1.8.0.RELEASE</swagger.starter.version>
         <druid.starter.version>1.1.14</druid.starter.version>
         <fastjson.version>1.2.56</fastjson.version>
+        <security.oauth2.version>2.3.5.RELEASE</security.oauth2.version>
     </properties>
 
     <dependencies>
-
         <!--web-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <!--fastJson-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
         </dependency>
-
         <!--mysql driver-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
-
         <!--druid-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
             <version>${druid.starter.version}</version>
         </dependency>
-
         <!--mybatis enhance-->
         <dependency>
             <groupId>com.gitee.hengboy</groupId>
             <artifactId>spring-boot-starter-mybatis-enhance</artifactId>
             <version>${mybatis.enhance.version}</version>
         </dependency>
-
         <!--mybatis pageable-->
         <dependency>
             <groupId>com.gitee.hengboy</groupId>
             <artifactId>spring-boot-starter-mybatis-pageable</artifactId>
             <version>${mybatis.pageable.version}</version>
         </dependency>
-
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
         <!--Swagger-->
         <dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>${swagger.starter.version}</version>
+        </dependency>
+
+        <!--spring boot security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!--security oauth2-->
+        <dependency>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
+            <version>${security.oauth2.version}</version>
         </dependency>
 
         <dependency>
