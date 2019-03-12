@@ -13,22 +13,33 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-package com.github.hengboy.api.boot.framework.security.jdbc;
+package com.github.hengboy.api.boot.framework.security;
 
-import com.gitee.hengboy.mybatis.enhance.mapper.EnhanceMapper;
+import lombok.Data;
+
 /**
- * Created with Code-Builder.
- * 表名: api_boot_user_info - ApiBoot默认的用户信息表 - 数据接口
+ * 内存方式安全认证用户实体类
  *
  * @author：恒宇少年 - 于起宇
  * <p>
- * DateTime：Mar 12, 2019 11:44:15 AM
+ * DateTime：2019-03-11 17:32
  * Blog：http://blog.yuqiyu.com
  * WebSite：http://www.jianshu.com/u/092df3f77bca
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-public interface ApiBootDefaultUserMapper
-     extends EnhanceMapper<ApiBootDefaultUserEntity, Integer> {
-
+@Data
+public class SecurityUser {
+    /**
+     * 用户名
+     */
+    private String username;
+    /**
+     * 用户密码
+     */
+    private String password;
+    /**
+     * 用户角色集合
+     */
+    private String[] roles = new String[]{"api"};
 }
