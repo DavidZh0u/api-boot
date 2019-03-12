@@ -15,13 +15,19 @@
  */
 package com.github.hengboy.api.boot.framework.security;
 
+import com.github.hengboy.api.boot.framework.security.properties.ApiBootSecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Arrays;
 
 /**
  * api 安全认证自动化配置类
@@ -37,6 +43,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
+    /**
+     * 注入ApiBoot安全属性
+     */
+    @Autowired
+    private ApiBootSecurityProperties apiBootSecurityProperties;
+
     /**
      * 密码加密方式
      * 自定义加密方式
@@ -61,5 +73,30 @@ public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapte
     public AuthenticationManager authenticationManagerBean()
             throws Exception {
         return super.authenticationManagerBean();
+    }
+
+    /**
+     * 排除安全拦截swagger、actuator等路径
+     *
+     * @param web
+     * @throws Exception
+     */
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 排除定义路径列表
+        String[] ignoringUrls = apiBootSecurityProperties.getIgnoringUrls();
+        WebSecurity.IgnoredRequestConfigurer ignoredRequestConfigurer = web.ignoring();
+        Arrays.stream(ignoringUrls).forEach(url -> ignoredRequestConfigurer.antMatchers(url));
+    }
+
+    /**
+     * 为访问swagger需要禁用http basic
+     *
+     * @param http
+     * @throws Exception
+     */
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic().disable();
     }
 }

@@ -43,12 +43,25 @@ public class ApiBootSecurityProperties {
      */
     public static final String API_BOOT_SECURITY_PREFIX = "api.boot.security";
     /**
+     * 默认的排除路径列表
+     */
+    private static final String[] DEFAULT_IGNORE_URLS = new String[]{
+            "/v2/api-docs",
+            "/swagger-ui.html",
+            "/swagger-resources/configuration/security",
+            "/META-INF/resources/webjars/**",
+            "/swagger-resources",
+            "/swagger-resources/configuration/ui",
+            "/actuator/**"
+    };
+    /**
      * 认证接口地址的前缀
      * 默认只拦截/api/**下的接口地址
      */
     private String authPrefix = "/api/**";
     /**
      * 认证用户存储方式
+     *
      * @see com.github.hengboy.api.boot.framework.security.SecurityAway
      */
     private String away;
@@ -58,4 +71,8 @@ public class ApiBootSecurityProperties {
      * value：密码
      */
     private List<SecurityUser> users = new ArrayList<>();
+    /**
+     * 排除路径列表
+     */
+    private String[] ignoringUrls = DEFAULT_IGNORE_URLS;
 }
