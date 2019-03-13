@@ -20,7 +20,7 @@
 - Lombok
 - FastJson
 
-详细的版本功能介绍访问[最新Wiki]()
+详细的版本功能介绍访问[最新文档介绍](https://gitee.com/hengboy/api-boot/wikis)
 
 ### 版本规划
 
