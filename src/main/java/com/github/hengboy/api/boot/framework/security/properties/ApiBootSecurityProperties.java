@@ -45,7 +45,7 @@ public class ApiBootSecurityProperties {
     /**
      * 默认的排除路径列表
      */
-    private static final String[] DEFAULT_IGNORE_URLS = new String[]{
+    public static final String[] DEFAULT_IGNORE_URLS = new String[]{
             "/v2/api-docs",
             "/swagger-ui.html",
             "/swagger-resources/configuration/security",
@@ -74,5 +74,11 @@ public class ApiBootSecurityProperties {
     /**
      * 排除路径列表
      */
-    private String[] ignoringUrls = DEFAULT_IGNORE_URLS;
+    private String[] ignoringUrls;
+    /**
+     * 是否启用默认的用户信息存储委托
+     * 如果away=jdbc时，该配置会自动读取api_boot_user_info表内的用户数据
+     * 如果配置该值为false，需要实现ApiBootStoreDelegate接口来完成自定义读取用户数据方法
+     */
+    private boolean enableDefaultStoreDelegate = true;
 }

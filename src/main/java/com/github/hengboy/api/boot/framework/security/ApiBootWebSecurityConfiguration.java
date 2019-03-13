@@ -26,8 +26,11 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.ObjectUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * api 安全认证自动化配置类
@@ -83,10 +86,15 @@ public class ApiBootWebSecurityConfiguration extends WebSecurityConfigurerAdapte
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        // 排除定义路径列表
-        String[] ignoringUrls = apiBootSecurityProperties.getIgnoringUrls();
+        List<String> ignoringUrls = new ArrayList<>();
+        // 默认排除路径
+        ignoringUrls.addAll(Arrays.asList(ApiBootSecurityProperties.DEFAULT_IGNORE_URLS));
+        // 自定义排除的路径
+        if (!ObjectUtils.isEmpty(apiBootSecurityProperties.getIgnoringUrls())) {
+            ignoringUrls.addAll(Arrays.asList(apiBootSecurityProperties.getIgnoringUrls()));
+        }
         WebSecurity.IgnoredRequestConfigurer ignoredRequestConfigurer = web.ignoring();
-        Arrays.stream(ignoringUrls).forEach(url -> ignoredRequestConfigurer.antMatchers(url));
+        ignoringUrls.stream().forEach(url -> ignoredRequestConfigurer.antMatchers(url));
     }
 
     /**

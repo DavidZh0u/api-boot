@@ -5,6 +5,7 @@ api:
     security:
       # 配置jdbc方式配置存储用户信息
       away: jdbc
+      enable-default-store-delegate: false
     # 配置Oauth2相关信息
     oauth:
       away: jdbc

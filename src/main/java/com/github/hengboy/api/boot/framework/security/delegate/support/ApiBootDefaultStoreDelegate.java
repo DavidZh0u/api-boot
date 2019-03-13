@@ -19,15 +19,20 @@ import com.gitee.hengboy.mybatis.enhance.dsl.factory.EnhanceDslFactory;
 import com.github.hengboy.api.boot.framework.security.delegate.ApiBootStoreDelegate;
 import com.github.hengboy.api.boot.framework.security.jdbc.DApiBootDefaultUserEntity;
 import com.github.hengboy.api.boot.framework.security.userdetails.ApiBootDefaultUserDetails;
+import com.github.hengboy.api.boot.framework.security.userdetails.ApiBootUserDetailsService;
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+
+import static com.github.hengboy.api.boot.framework.security.properties.ApiBootSecurityProperties.API_BOOT_SECURITY_PREFIX;
 
 /**
  * ApiBoot提供的默认数据委托实现类
@@ -41,7 +46,9 @@ import javax.annotation.PostConstruct;
  * Gitee：https://gitee.com/hengboy
  * GitHub：https://github.com/hengboy
  */
-@Service
+@Component
+@ConditionalOnBean(ApiBootUserDetailsService.class)
+@ConditionalOnProperty(prefix = API_BOOT_SECURITY_PREFIX, name = "enable-default-store-delegate", havingValue = "true", matchIfMissing = true)
 public class ApiBootDefaultStoreDelegate implements ApiBootStoreDelegate {
     /**
      * logger instance
