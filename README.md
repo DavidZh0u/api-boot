@@ -1,57 +1,51 @@
-[TOC]
+`ApiBoot`是一款基础的接口服务框架的整合，开箱即用，对于接口服务的开发者而言可以很大的提高开发效率，之前在`SpringBoot`系列文章内也有很多同学让我出一个整合的示例，这个也可以当做结合我编写的文章的示例来看，每个版本的迭代都会把之前文章的内容加入进去，当然也会有很多的扩展，让使用者运用自如。
 
-## Api-Boot
 
-### 0.1.0-RC
 
-- 安全处理
+### 最新版本
 
-  SpringSecurity + OAuth2 + JWT
+当前版本集成如下所示：
 
-- 统一格式返回
-
-  ApiBootResult
-
-- Swagger
-
-  Swagger2
-
-- 数据验证
-
-  SpringMvc Validator
-
-- ORM集成
-
-  Mybatis、Data-JPA
-
-- Code-Builder集成
-
-- Profile多环境
-
+- SpringSecurity
+- Oauth2
+- Jwt
+- 统一返回格式
+- Swagger2 文档生成
+- Mybatis-Enhance
+- Code-Builder
+- Profile
 - Lombok
+- FastJson
 
-### 0.2.0-RC
+详细的版本功能介绍访问[最新Wiki]()
 
-- 提供内置事件发布（Spring Event/Listener)
-- 工具类
-- 七牛云
-- OSS
-- 阿里短信
+### 版本规划
 
-### 0.3.0-RC
+下一个版本的迭代主要是集成第三方依赖如下所示：
 
-- 极光推送
-- 微信支付
-- 支付宝支付
+- 七牛云上传/下载
+- 阿里云OSS上传/下载
+- 阿里云短信服务
+- 内置事件发布（Spring Event）
 
-### 0.4.0-RC
+### 目录概述
 
-- Docker部署
-- 统一异常
-- Quartz
+```
+. framework
+├── converter
+├── enums
+├── event
+├── model
+├── security
+│   ├── delegate
+│   ├── jdbc
+│   ├── properties
+│   └── userdetails
+└── tools
+```
 
-### 0.5.0-RC
+`ApiBoot`集成框架相关的代码实现都在`com.github.hengboy.api.boot.framework`目录下，如果你需要编写自己的业务尽可能的在`framework`的同级目录创建`package`来进行编写，`ApiBoot`默认扫描`com.github.hengboy.api.boot`目录下的所有类。
 
-- Redis
-- 统一资源
-- MapStruct
+### 开源许可
+
+`ApiBoot`采用`Apache2`开源许可。
