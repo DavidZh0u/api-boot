@@ -36,10 +36,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.ObjectUtils;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 配置fastjson作为数据返回转换
@@ -103,16 +100,23 @@ public class HttpMessageConverterConfiguration {
      * @return ValueFilter数组
      */
     ValueFilter[] getDefineFilters() {
-        Set<ValueFilter> valueFilters = new HashSet<>();
+        Set<Class> filterClass = new HashSet<>();
         // 获取项目的package列表
         List<String> packages = AutoConfigurationPackages.get(beanFactory);
         if (ObjectUtils.isEmpty(packages)) {
-            return valueFilters.toArray(new ValueFilter[]{});
+            return new ValueFilter[]{};
         }
         // 读取所有package下的ValueFilter实现类
-        packages.stream().forEach(pack -> valueFilters.addAll((Collection<? extends ValueFilter>) ClassTools.getSubClassList(pack, ValueFilter.class)));
-        ValueFilter[] filterArray = valueFilters.toArray(new ValueFilter[]{});
-        logger.info("Loaded ValueFilter : {}", filterArray.toString());
-        return filterArray;
+        packages.stream().forEach(pack -> filterClass.addAll((Collection<? extends Class>) ClassTools.getSubClassList(pack, ValueFilter.class)));
+        List<ValueFilter> filters = new LinkedList<>();
+        filterClass.stream().forEach(filter -> {
+            try {
+                filters.add((ValueFilter) filter.newInstance());
+            } catch (Exception e) {
+                logger.error("ValueFilter new instance have error.", e);
+            }
+        });
+        logger.info("Loaded ValueFilter : {}", filterClass.toString());
+        return filters.toArray(new ValueFilter[]{});
     }
 }
