@@ -1,3 +1,6 @@
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](https://github.com/weibocom/motan/blob/master/LICENSE) ![](https://img.shields.io/badge/JDK-1.8+-green.svg) ![](https://img.shields.io/badge/SpringBoot-1.4+_1.5+_2.0+-green.svg)
+
 `ApiBoot`是一款基础的接口服务框架的整合，开箱即用，对于接口服务的开发者而言可以很大的提高开发效率，之前在`SpringBoot`系列文章内也有很多同学让我出一个整合的示例，这个也可以当做结合我编写的文章的示例来看，每个版本的迭代都会把之前文章的内容加入进去，当然也会有很多的扩展，让使用者运用自如。
 
 
